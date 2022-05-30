@@ -85,35 +85,35 @@ async function carreras(){
             case 0:
                 const li0 = document.createElement("li");
                 li0.className="list-group-item"
-                li0.textContent = "Fecha Libres 1: " +data.FirstPractice.date + " Hora: " + data.FirstPractice.time.substring(0, data.FirstPractice.time.length -1)
+                li0.textContent = "Fecha Libres 1: " +data.FirstPractice.date + " Hora: " + data.FirstPractice.time.substring(0, data.FirstPractice.time.length -4)
                 ul.appendChild(li0)
             break;
 
             case 1:
                 const li1 = document.createElement("li");
                 li1.className="list-group-item"
-                li1.textContent = "Fecha Libres 2: " +data.SecondPractice.date + " Hora: " + data.SecondPractice.time.substring(0, data.FirstPractice.time.length -1)
+                li1.textContent = "Fecha Libres 2: " +data.SecondPractice.date + " Hora: " + data.SecondPractice.time.substring(0, data.FirstPractice.time.length -4)
                 ul.appendChild(li1)
             break;
 
             case 2:
                 const li2 = document.createElement("li");
                 li2.className="list-group-item"
-                li2.textContent = "Fecha Libres 3: " +data.ThirdPractice.date + " Hora: " + data.ThirdPractice.time.substring(0, data.FirstPractice.time.length -1)
+                li2.textContent = "Fecha Libres 3: " +data.ThirdPractice.date + " Hora: " + data.ThirdPractice.time.substring(0, data.FirstPractice.time.length -4)
                 ul.appendChild(li2)
             break;
 
             case 3:
                 const li3 = document.createElement("li");
                 li3.className="list-group-item"
-                li3.textContent = "Fecha Clasificación: " +data.Qualifying.date + " Hora: " + data.Qualifying.time.substring(0, data.FirstPractice.time.length -1)
+                li3.textContent = "Fecha Clasificación: " +data.Qualifying.date + " Hora: " + data.Qualifying.time.substring(0, data.FirstPractice.time.length -4)
                 ul.appendChild(li3)
             break;
 
             case 4:
                 const li4 = document.createElement("li");
                 li4.className="list-group-item"
-                li4.textContent = "Fecha Carrera: " +data.date + " Hora: " + data.time.substring(0, data.FirstPractice.time.length -1)
+                li4.textContent = "Fecha Carrera: " +data.date + " Hora: " + data.time.substring(0, data.FirstPractice.time.length -4)
                 ul.appendChild(li4)
             break;
             
