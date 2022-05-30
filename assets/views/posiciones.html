@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap" rel="stylesheet"> 
+        <title>Formula 1</title>
+    </head>
+    <body>
+        <main>
+
+          <header class="d-flex bg-dark flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <a class="d-flex align-items-center col-md-3 mx-2 text-dark text-decoration-none">
+              <img src = "../img/F1-logoRed.svg" alt="F1"/>
+            </a>
+      
+            <ul class="nav col-12 col-md-auto me-4 justify-content-center mb-md-0 align-items-center">
+              <li><a href="../../index.html" class="btn btn-danger bg-dark nav-link px-2 text-white ">Inicio</a></li>
+              <li><a href="./posiciones.html" class="ms-1 btn btn-danger bg-dark nav-link px-2 text-danger">Posiciones</a></li>
+              <li><a href="#" class="btn btn-danger bg-dark ms-1 nav-link px-2 text-white">Pilotos</a></li>
+              <li><a href="#" class="btn btn-danger bg-dark ms-1 nav-link px-2 text-white">Equipos</a></li>
+              <li><a href="#" class="btn btn-danger bg-dark ms-1 nav-link px-2 text-white">Merchandising</a></li>
+            </ul>
+          </header>
+      
+            <h1 class="text-center text-white mt-5 pb-3 titColor">Tabla de posiciones</h1>
+            <div class="container-fluid hr1 bg-dark"></div>
+            <br>
+            <div class="container-fluid d-flex justify-content-evenly">
+            <div class="input-group ms-5 ps-5">
+              <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg></span>
+              <input id="buscar" type="search" placeholder="Buscar piloto">
+            </div>
+            <div class="resultado col-2">
+              <button id="botonAdd" class="boton css-button-sharp--black">Cargar Datos</button>
+            </div>
+          </div>
+            <br>
+            <div class="justify-content-center text-center text-capitalize">
+                <table class="table table-responsive table-bordered table-dark table-striped table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Pos.</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Escuderia</th>
+                        <th scope="col">Puntos</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table">
+                    </tbody>
+                  </table>
+            </div>
+        </main>
+        <script src="../js/posiciones.js"></script>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html> 
