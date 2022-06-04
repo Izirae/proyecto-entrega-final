@@ -1,3 +1,5 @@
+let pilotos = []
+
 async function pilotosCard(){
 
     await fetch('http://ergast.com/api/f1/current/drivers.json')
@@ -6,7 +8,10 @@ async function pilotosCard(){
 
     }).then((driver)=>{
 
-    driver.MRData.DriverTable.Drivers.forEach((data) => {
+    pilotos = driver.MRData.DriverTable.Drivers
+    })
+
+    pilotos.forEach((data) => {
 
         const li = document.createElement("li");
         const a = document.createElement("a");
@@ -54,7 +59,6 @@ async function pilotosCard(){
                         imgBandera.className = "flag";
     
         card.appendChild(li)
-    })
     })
 }
 

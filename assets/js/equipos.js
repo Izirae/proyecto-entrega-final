@@ -1,3 +1,5 @@
+let equipos = []
+
 async function pilotosCard(){
 
     await fetch('http://ergast.com/api/f1/current/constructors.json')
@@ -6,7 +8,11 @@ async function pilotosCard(){
 
     }).then((team)=>{
 
-    team.MRData.ConstructorTable.Constructors.forEach((data) => {
+    equipos = team.MRData.ConstructorTable.Constructors
+    
+    })
+
+    equipos.forEach((data) => {
 
         const li = document.createElement("li");
         const a = document.createElement("a");
@@ -45,7 +51,6 @@ async function pilotosCard(){
                             imgLogo.className = "logo";
     
         card.appendChild(li)
-    })
     })
 }
 
