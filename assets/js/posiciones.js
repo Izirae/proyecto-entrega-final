@@ -115,8 +115,15 @@ function actualizarDatos(){
         }
 }  
 
-
-
+btnInicio.onclick = () => {
+    window.location.href = "../../index.html"
+}
+btnPilotos.onclick = () => {
+    window.location.href = "./pilotos.html"
+}
+btnEquipos.onclick = () => {
+    window.location.href = "./equipos.html"
+}
 crearTabla()
 
 

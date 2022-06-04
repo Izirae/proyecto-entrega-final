@@ -126,6 +126,17 @@ async function carreras(){
     })
 
 }
+
+btnPosiciones.onclick = () => {
+    window.location.href = "./assets/views/posiciones.html"
+}
+btnPilotos.onclick = () => {
+    window.location.href = "./assets/views/pilotos.html"
+}
+btnEquipos.onclick = () => {
+    window.location.href = "./assets/views/equipos.html"
+}
+
 carreras()
 
 

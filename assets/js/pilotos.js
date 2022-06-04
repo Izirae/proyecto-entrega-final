@@ -62,5 +62,15 @@ async function pilotosCard(){
     })
 }
 
+btnInicio.onclick = () => {
+    window.location.href = "../../index.html"
+}
+btnPosiciones.onclick = () => {
+    window.location.href = "./posiciones.html"
+}
+btnEquipos.onclick = () => {
+    window.location.href = "./equipos.html"
+}
+
 pilotosCard()
 
