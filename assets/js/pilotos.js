@@ -1,15 +1,8 @@
 let pilotos = []
 
-async function pilotosCard(){
+function cards (){
 
-    await fetch('http://ergast.com/api/f1/current/drivers.json')
-    .then( (drivers)=>{
-    return drivers.json();
-
-    }).then((driver)=>{
-
-    pilotos = driver.MRData.DriverTable.Drivers
-    })
+    card.hidden=true;
 
     pilotos.forEach((data) => {
 
@@ -33,8 +26,9 @@ async function pilotosCard(){
         li.appendChild(a);
             a.className = "author-card";
             a.href = data.url
+            a.target = "_blank"
             a.appendChild(imgPiloto);
-                imgPiloto.src = "../img/drivers/"+data.driverId+".png";
+                imgPiloto.src = "../img/drivers/"+data.driverId+" (Teléfono) (1).png";
                 imgPiloto.className = "image";
             a.appendChild(div);
                 div.className = "overlay";
@@ -59,7 +53,28 @@ async function pilotosCard(){
                         imgBandera.className = "flag";
     
         card.appendChild(li)
+
     })
+
+}
+
+async function pilotosCard(){
+
+    await fetch('http://ergast.com/api/f1/current/drivers.json')
+    .then( (drivers)=>{
+    return drivers.json();
+
+    }).then((driver)=>{
+
+    pilotos = driver.MRData.DriverTable.Drivers
+    })
+
+    cards()
+
+    const awaitTimeout = delay =>
+        new Promise(resolve => setTimeout(resolve, delay));
+
+    awaitTimeout(185).then(() => card.hidden=false)
 }
 
 btnInicio.onclick = () => {

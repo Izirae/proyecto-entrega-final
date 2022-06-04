@@ -1,14 +1,9 @@
-async function carreras(){
+let ultimaCarrera = []
+let siguienteCarrera = []
 
-    // Última carrera
+function carreras(){
 
-    await fetch('http://ergast.com/api/f1/current/last/results.json')
-    .then( (raceData)=>{
-    return raceData.json();
-
-    }).then((race)=>{
-
-    race.MRData.RaceTable.Races.forEach((data) => {
+    ultimaCarrera.forEach((data) => {
             
 
         const div = document.createElement("div");
@@ -43,17 +38,8 @@ async function carreras(){
 
     card.appendChild(div)
     })
-    })
 
-    // Siguiente carrera
-
-    await fetch('http://ergast.com/api/f1/current/next.json')
-    .then( (raceData)=>{
-    return raceData.json();
-
-    }).then((race)=>{
-
-    race.MRData.RaceTable.Races.forEach((data) => {
+    siguienteCarrera.forEach((data) => {
             
 
         const div = document.createElement("div");
@@ -123,21 +109,57 @@ async function carreras(){
 
     card.appendChild(div)
     })
+}
+
+async function datosCarreras(){
+
+    // Última carrera
+
+    await fetch('http://ergast.com/api/f1/current/last/results.json')
+    .then( (raceData)=>{
+    return raceData.json();
+
+    }).then((race)=>{
+
+    ultimaCarrera = race.MRData.RaceTable.Races
     })
+
+    // Siguiente carrera
+
+    await fetch('http://ergast.com/api/f1/current/next.json')
+    .then( (raceData)=>{
+    return raceData.json();
+
+    }).then((race)=>{
+
+    siguienteCarrera = race.MRData.RaceTable.Races
+    })
+
+    carreras()
 
 }
 
 btnPosiciones.onclick = () => {
     window.location.href = "./assets/views/posiciones.html"
 }
+
 btnPilotos.onclick = () => {
     window.location.href = "./assets/views/pilotos.html"
 }
+
 btnEquipos.onclick = () => {
     window.location.href = "./assets/views/equipos.html"
 }
 
-carreras()
+btnLogin.onclick = () => {
+    window.location.href = "./assets/views/login.html"
+}
+
+btnRegistro.onclick = () => {
+    window.location.href = "./assets/views/crearUsuario.html"
+}
+
+datosCarreras()
 
 
 

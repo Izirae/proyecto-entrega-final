@@ -1,16 +1,8 @@
 let equipos = []
 
-async function pilotosCard(){
+function cards(){
 
-    await fetch('http://ergast.com/api/f1/current/constructors.json')
-    .then( (teams)=>{
-    return teams.json();
-
-    }).then((team)=>{
-
-    equipos = team.MRData.ConstructorTable.Constructors
-    
-    })
+    cards.hidden=true;
 
     equipos.forEach((data) => {
 
@@ -52,6 +44,27 @@ async function pilotosCard(){
     
         card.appendChild(li)
     })
+
+}
+
+async function pilotosCard(){
+
+    await fetch('http://ergast.com/api/f1/current/constructors.json')
+    .then( (teams)=>{
+    return teams.json();
+
+    }).then((team)=>{
+
+    equipos = team.MRData.ConstructorTable.Constructors
+    
+    })
+
+    cards()
+
+    const awaitTimeout = delay =>
+        new Promise(resolve => setTimeout(resolve, delay));
+
+    awaitTimeout(185).then(() => card.hidden=false)
 }
 
 btnInicio.onclick = () => {
