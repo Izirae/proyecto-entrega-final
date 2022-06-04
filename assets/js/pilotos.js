@@ -28,7 +28,7 @@ function cards (){
             a.href = data.url
             a.target = "_blank"
             a.appendChild(imgPiloto);
-                imgPiloto.src = "../img/drivers/"+data.driverId+" (Teléfono) (1).png";
+                imgPiloto.src = "../img/drivers/"+data.driverId+".png";
                 imgPiloto.className = "image";
             a.appendChild(div);
                 div.className = "overlay";

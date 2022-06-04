@@ -5,7 +5,7 @@
 }
 
 :root {
-    --surface-color: #3c4247;
+    --surface-color: #6e6d75;
     --text-color: #fef8f8;
     --curve: 40;
   }
@@ -160,7 +160,7 @@ body{
   .author-card > .image {    
     height: auto;
     width: 100%;
-    background-color: rgb(255, 235, 235);
+    background-color: rgb(233, 188, 188);
 
   }
   
