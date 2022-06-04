@@ -1,10 +1,10 @@
 let usuarios = [{usuario: "admin", contrasena: "admin"}]
-
+let estadoLogin = false
 
 function actualizarUsers(){
-        let usersLocal = JSON.parse(sessionStorage.getItem('usuarios'))
+        let usersLocal = JSON.parse(localStorage.getItem('usuarios'))
         if(usersLocal == null){
-            const guardarLocal = (nombre, contrasena) => {sessionStorage.setItem(nombre, contrasena)};
+            const guardarLocal = (nombre, datos) => {localStorage.setItem(nombre, datos)};
             guardarLocal("usuarios", JSON.stringify(usuarios));
         } else {
             usuarios = usuarios.concat(usersLocal)
@@ -44,6 +44,9 @@ function login(){
             color: '#ffffff',
             timerProgressBar: true,
         }).then(() => {
+                estadoLogin = true
+                const guardarLocal = (nombre, datos) => {sessionStorage.setItem(nombre, datos)};
+                    guardarLocal("dataLogin", JSON.stringify(estadoLogin));
                 window.location.href="../views/cargarDatos.html";
             })
     }else {

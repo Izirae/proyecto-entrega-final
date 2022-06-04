@@ -1,5 +1,9 @@
 let ultimaCarrera = []
 let siguienteCarrera = []
+let estadoLogin = []
+
+estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
+estadoLogin ? console.log("estas logueado") : console.log("no estas logueado")
 
 function carreras(){
 
