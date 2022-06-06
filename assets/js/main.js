@@ -3,7 +3,44 @@ let siguienteCarrera = []
 let estadoLogin = []
 
 estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
-estadoLogin ? console.log("estas logueado") : console.log("no estas logueado")
+
+function estadoLogueo() {
+    if(estadoLogin.estado){
+
+        while(logged.firstChild){
+            logged.removeChild(logged.firstChild)
+        }
+
+        const p = document.createElement("p")
+        const btnCamp = document.createElement("button")
+        const btnLogout = document.createElement("button")
+
+        logged.appendChild(p)
+            p.className = "pColor"
+            p.innerText = "Bienvenido, " + estadoLogin.user
+        logged.appendChild(btnCamp)
+            btnCamp.type = "button"
+            btnCamp.onclick = () => {window.location.href = "./assets/views/campeonato.html"};
+            btnCamp.className = "btn btn-outline-danger text-white me-1"
+            btnCamp.innerText = "Mi Campeonato"
+        logged.appendChild(btnLogout)
+            btnLogout.type = "button"
+            btnLogout.className = "btn btn-outline-danger text-white"
+            btnLogout.innerText = "Salir"
+            btnLogout.onclick = logout;
+    }
+}
+
+function logout(){
+
+    estadoLogin.estado = false
+    estadoLogin.user = ""
+
+    const guardarLocal = (nombre, datos) => {sessionStorage.setItem(nombre, datos)};
+        guardarLocal("dataLogin", JSON.stringify(estadoLogin));
+
+    location.reload()
+}
 
 function carreras(){
 
@@ -163,7 +200,9 @@ btnRegistro.onclick = () => {
     window.location.href = "./assets/views/crearUsuario.html"
 }
 
+btnRegistro.onclick = () => {
+    window.location.href = "./assets/views/crearUsuario.html"
+}
+
+estadoLogueo()
 datosCarreras()
-
-
-

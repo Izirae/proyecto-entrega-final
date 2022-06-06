@@ -1,4 +1,45 @@
 let pilotos = []
+let estadoLogin = []
+
+estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
+
+function estadoLogueo() {
+    if(estadoLogin.estado){
+
+        while(logged.firstChild){
+            logged.removeChild(logged.firstChild)
+        }
+
+        const p = document.createElement("p")
+        const btnCamp = document.createElement("button")
+        const btnLogout = document.createElement("button")
+
+        logged.appendChild(p)
+            p.className = "pColor"
+            p.innerText = "Bienvenido, " + estadoLogin.user
+        logged.appendChild(btnCamp)
+            btnCamp.type = "button"
+            btnCamp.onclick = () => {window.location.href = "./assets/views/campeonato.html"};
+            btnCamp.className = "btn btn-danger text-dark me-1"
+            btnCamp.innerText = "Mi Campeonato"
+        logged.appendChild(btnLogout)
+            btnLogout.type = "button"
+            btnLogout.className = "btn btn-outline-danger text-white"
+            btnLogout.innerText = "Salir"
+            btnLogout.onclick = logout;
+    }
+}
+
+function logout(){
+
+    estadoLogin.estado = false
+    estadoLogin.user = ""
+
+    const guardarLocal = (nombre, datos) => {sessionStorage.setItem(nombre, datos)};
+        guardarLocal("dataLogin", JSON.stringify(estadoLogin));
+
+    window.location.href = "../../index.html"
+}
 
 function borrarTabla(){
     let columna = table.rows.length;
@@ -7,10 +48,10 @@ function borrarTabla(){
         }
 }
 
-function actualizarDatos(){
-    let pilotosLocal = JSON.parse(sessionStorage.getItem('pilotos'))
-    pilotos = [...pilotosLocal]
-}
+// function actualizarDatos(){
+//     let pilotosLocal = JSON.parse(sessionStorage.getItem('pilotos'))
+//     pilotos = [...pilotosLocal]
+// }
 
 function cargar() {
     const select = document.getElementById("pilotos");
@@ -148,7 +189,7 @@ function buscarPiloto() {
     })
 }
 
-actualizarDatos()
+estadoLogueo()
 cargar()
 crearTabla()
 
@@ -182,3 +223,19 @@ sumar.addEventListener("keypress", function onEvent(evento) {
         cargarPuntos()
     }
 });
+
+btnInicio.onclick = () => {
+    window.location.href = "../../index.html"
+}
+
+btnPilotos.onclick = () => {
+    window.location.href = "../views/pilotos.html"
+}
+
+btnEquipos.onclick = () => {
+    window.location.href = "../views/equipos.html"
+}
+
+btnPosiciones.onclick = () => {
+    window.location.href = "../views/posiciones.html"
+}

@@ -7,7 +7,7 @@ class User{
 }
 
 function actualizarUsers(){
-    let usersLocal = JSON.parse(sessionStorage.getItem('usuarios'))
+    let usersLocal = JSON.parse(localStorage.getItem('usuarios'))
     usuariosN = usuariosN.concat(usersLocal)
 }
 
@@ -37,7 +37,7 @@ function nuevoUser(){
         }).then((resultado) => {
             if (resultado.isConfirmed) {
                 usuariosN.push(new User(user,pass))
-                const guardarLocal = (nombre, contrasena) => {sessionStorage.setItem(nombre, contrasena)};    
+                const guardarLocal = (nombre, contrasena) => {localStorage.setItem(nombre, contrasena)};    
                 guardarLocal("usuarios", JSON.stringify(usuariosN));
                 window.location.href= "../views/login.html";
             }

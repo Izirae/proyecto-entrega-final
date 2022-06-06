@@ -1,9 +1,10 @@
-let usuarios = [{usuario: "admin", contrasena: "admin"}]
-let estadoLogin = false
+let usuarios = []
+let estadoLogin = {estado: false, user:""}
 
 function actualizarUsers(){
         let usersLocal = JSON.parse(localStorage.getItem('usuarios'))
         if(usersLocal == null){
+            usuarios = [{usuario: "admin", contrasena: "admin"}]
             const guardarLocal = (nombre, datos) => {localStorage.setItem(nombre, datos)};
             guardarLocal("usuarios", JSON.stringify(usuarios));
         } else {
@@ -44,10 +45,11 @@ function login(){
             color: '#ffffff',
             timerProgressBar: true,
         }).then(() => {
-                estadoLogin = true
+                logged.estado = true
+                logged.user = user
                 const guardarLocal = (nombre, datos) => {sessionStorage.setItem(nombre, datos)};
-                    guardarLocal("dataLogin", JSON.stringify(estadoLogin));
-                window.location.href="../views/cargarDatos.html";
+                    guardarLocal("dataLogin", JSON.stringify(logged));
+                window.location.href="../../index.html";
             })
     }else {
         Swal.fire({
@@ -70,3 +72,23 @@ logear.addEventListener("keypress", function onEvent(evento) {
         login();
     }
 });
+
+btnInicio.onclick = () => {
+    window.location.href = "../../index.html"
+}
+
+btnPilotos.onclick = () => {
+    window.location.href = "./pilotos.html"
+}
+
+btnEquipos.onclick = () => {
+    window.location.href = "./views/equipos.html"
+}
+
+btnPosiciones.onclick = () => {
+    window.location.href = "./posiciones.html"
+}
+
+btnRegistro.onclick = () => {
+    window.location.href = "./crearUsuario.html"
+}

@@ -10,6 +10,47 @@ class Piloto{
 }
 
 let pilotos = []
+let estadoLogin = []
+
+estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
+
+function estadoLogueo() {
+    if(estadoLogin.estado){
+
+        while(logged.firstChild){
+            logged.removeChild(logged.firstChild)
+        }
+
+        const p = document.createElement("p")
+        const btnCamp = document.createElement("button")
+        const btnLogout = document.createElement("button")
+
+        logged.appendChild(p)
+            p.className = "pColor"
+            p.innerText = "Bienvenido, " + estadoLogin.user
+        logged.appendChild(btnCamp)
+            btnCamp.type = "button"
+            btnCamp.onclick = () => {window.location.href = "./campeonato.html"};
+            btnCamp.className = "btn btn-outline-danger text-white me-1"
+            btnCamp.innerText = "Mi Campeonato"
+        logged.appendChild(btnLogout)
+            btnLogout.type = "button"
+            btnLogout.className = "btn btn-outline-danger text-white"
+            btnLogout.innerText = "Salir"
+            btnLogout.onclick = logout;
+    }
+}
+
+function logout(){
+
+    estadoLogin.estado = false
+    estadoLogin.user = ""
+
+    const guardarLocal = (nombre, datos) => {sessionStorage.setItem(nombre, datos)};
+        guardarLocal("dataLogin", JSON.stringify(estadoLogin));
+
+    location.reload()
+}
 
 async function llamarAPI(){
     await fetch('http://ergast.com/api/f1/current/driverStandings.json')
@@ -31,6 +72,8 @@ function borrarTabla(){
 
 async function crearTabla(){
 
+    fullTable.hidden = true
+
     await llamarAPI()
     actualizarDatos()
     pilotos.sort((a, b) => {return b.puntos - a.puntos;});
@@ -38,7 +81,7 @@ async function crearTabla(){
         pilotos[i].posicion = i + 1
         pilotos[i].posicion = pilotos[i].posicion.toString()
     }
-    console.log(pilotos, "pilotos tabla")
+    
     borrarTabla()
     const tabla = document.getElementById('table');
     
@@ -69,6 +112,9 @@ async function crearTabla(){
         tabla.appendChild(tr);
     })
 
+    const awaitTimeout = delay =>
+        new Promise(resolve => setTimeout(resolve, delay));
+    awaitTimeout(200).then(() => fullTable.hidden=false)
 
 }
     
@@ -124,24 +170,18 @@ btnPilotos.onclick = () => {
 btnEquipos.onclick = () => {
     window.location.href = "./equipos.html"
 }
-crearTabla()
-
-
-let boton = document.getElementById("botonAdd")
-
-boton.onclick = () => {
-    sessionStorage.setItem("pilotos", JSON.stringify(pilotos));
-    window.location.href = "../views/login.html"
+btnLogin.onclick = () => {
+    window.location.href = "./login.html"
 }
+
+btnRegistro.onclick = () => {
+    window.location.href = "./crearUsuario.html"
+}
+
+estadoLogueo()
+crearTabla()
 
 const search = document.getElementById("buscar")
 search.addEventListener("keypress", function onEvent(evento) {
     if (evento.key === "Enter") buscarPiloto();
 });
-
-const pilotos1 = {...pilotos}
-console.log(pilotos1, "spread de pilotos")
-
-
-
-

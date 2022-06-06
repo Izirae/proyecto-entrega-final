@@ -1,4 +1,45 @@
 let equipos = []
+let estadoLogin = []
+
+estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
+
+function estadoLogueo() {
+    if(estadoLogin.estado){
+
+        while(logged.firstChild){
+            logged.removeChild(logged.firstChild)
+        }
+
+        const p = document.createElement("p")
+        const btnCamp = document.createElement("button")
+        const btnLogout = document.createElement("button")
+
+        logged.appendChild(p)
+            p.className = "pColor"
+            p.innerText = "Bienvenido, " + estadoLogin.user
+        logged.appendChild(btnCamp)
+            btnCamp.type = "button"
+            btnCamp.onclick = () => {window.location.href = "./campeonato.html"};
+            btnCamp.className = "btn btn-outline-danger text-white me-1"
+            btnCamp.innerText = "Mi Campeonato"
+        logged.appendChild(btnLogout)
+            btnLogout.type = "button"
+            btnLogout.className = "btn btn-outline-danger text-white"
+            btnLogout.innerText = "Salir"
+            btnLogout.onclick = logout;
+    }
+}
+
+function logout(){
+
+    estadoLogin.estado = false
+    estadoLogin.user = ""
+
+    const guardarLocal = (nombre, datos) => {sessionStorage.setItem(nombre, datos)};
+        guardarLocal("dataLogin", JSON.stringify(estadoLogin));
+
+    location.reload()
+}
 
 function cards(){
 
@@ -64,7 +105,7 @@ async function pilotosCard(){
     const awaitTimeout = delay =>
         new Promise(resolve => setTimeout(resolve, delay));
 
-    awaitTimeout(185).then(() => card.hidden=false)
+    awaitTimeout(200).then(() => card.hidden=false)
 }
 
 btnInicio.onclick = () => {
@@ -77,5 +118,14 @@ btnPilotos.onclick = () => {
     window.location.href = "./pilotos.html"
 }
 
+btnLogin.onclick = () => {
+    window.location.href = "./login.html"
+}
+
+btnRegistro.onclick = () => {
+    window.location.href = "./crearUsuario.html"
+}
+
+estadoLogueo()
 pilotosCard()
 
