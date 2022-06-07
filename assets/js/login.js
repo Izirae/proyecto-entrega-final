@@ -39,7 +39,7 @@ function login(){
             width: 300,
             imageWidth: 100,
             imageHeight: 100,
-            timer: 2000,
+            timer: 1500,
             position: 'center',
             showConfirmButton: false,
             color: '#ffffff',

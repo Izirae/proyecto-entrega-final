@@ -138,14 +138,56 @@ function buscarPiloto() {
     
 
 function actualizarDatos(){
-    let pilotosLocal = JSON.parse(localStorage.getItem('pilotos'))
-        pilotosLocal !== null ? pilotos = [...pilotosLocal] : console.log(pilotosLocal, "esta vacio")
+    let campeonatoLS = JSON.parse(localStorage.getItem('campeonato'))
+        if(campeonatoLS == null){
+            campeonato.duenio = estadoLogin.user
+            Swal.fire({
+                title: 'Ingrese el nombre de su campeonato',
+                input: 'text',
+                background: '#212529',
+                showCancelButton: true,
+                inputPlaceholder: 'Nombre del campeonato'
+            }).then((result) => {
+                console.log(result)
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Campeonato creado correctamente',
+                        background: '#212529',
+                        icon: 'success',
+                        timer: 1500,
+                        position: 'center',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                    })
+                    campeonato.nombre = result.value
+
+                    const guardarLocal = (nombre, datos) => {localStorage.setItem(nombre, datos)};
+                        guardarLocal("campeonato", JSON.stringify(campeonato));
+
+                    location.reload()
+                }
+                if (result.isDismissed) {
+                    Swal.fire({
+                        title: 'Se canceló la creación del campeonato',
+                        background: '#212529',
+                        icon: 'error',
+                        timer: 1500,
+                        position: 'center',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                    })
+                    window.location.href = '../../index.html'
+                }
+                })
+        } else{
+            campeonato = campeonatoLS
+            titulo.innerText = 'Campeonato ' + campeonato.nombre + ': Tabla de Posiciones'
+        }
 }    
 
 estadoLogueo()
 
 actualizarDatos()
-console.log(campeonato.pilotos)
 
 campeonato.pilotos.sort((a, b) => {return b.puntos - a.puntos;});
 
