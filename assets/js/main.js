@@ -1,8 +1,11 @@
-let ultimaCarrera = []
-let siguienteCarrera = []
-let estadoLogin = []
+let estadoLogin = {estado: false, user:""}
 
-estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
+let estadoLoginLS = JSON.parse(sessionStorage.getItem('dataLogin'))
+if(estadoLoginLS !== null){
+    estadoLogin = estadoLoginLS
+}
+
+/* FUNCIONES LOGIN */
 
 function estadoLogueo() {
     if(estadoLogin.estado){
@@ -41,6 +44,11 @@ function logout(){
 
     location.reload()
 }
+
+/* FIN FUNCIONES LOGIN */
+
+let ultimaCarrera = []
+let siguienteCarrera = []
 
 function carreras(){
 

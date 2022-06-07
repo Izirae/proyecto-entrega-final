@@ -1,7 +1,11 @@
-let pilotos = []
 let estadoLogin = []
 
-estadoLogin = JSON.parse(sessionStorage.getItem('dataLogin'))
+let estadoLoginLS = JSON.parse(sessionStorage.getItem('dataLogin'))
+if(estadoLoginLS !== null){
+    estadoLogin = estadoLoginLS
+}
+
+/* FUNCIONES LOGIN */
 
 function estadoLogueo() {
     if(estadoLogin.estado){
@@ -40,6 +44,10 @@ function logout(){
 
     location.reload()
 }
+
+/* FIN FUNCIONES LOGIN */
+
+let pilotos = []
 
 function cards (){
 
