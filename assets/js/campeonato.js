@@ -34,7 +34,7 @@ function estadoLogueo() {
             p.innerText = "Bienvenido, " + estadoLogin.user
         logged.appendChild(btnCamp)
             btnCamp.type = "button"
-            btnCamp.onclick = () => {window.location.href = "./assets/views/campeonato.html"};
+            btnCamp.onclick = () => {window.location.href = "#"};
             btnCamp.className = "btn btn-danger text-dark me-1"
             btnCamp.innerText = "Mi Campeonato"
         logged.appendChild(btnLogout)
@@ -58,7 +58,7 @@ function logout(){
 
 /* FIN FUNCIONES LOGIN */
 
-let campeonato = {nombre: '', duenio: '', pilotos: []}
+let campeonato = {nombre: '', pilotos: []}
 
 function borrarTabla(){
     let columna = table.rows.length;
@@ -138,56 +138,73 @@ function buscarPiloto() {
     
 
 function actualizarDatos(){
-    let campeonatoLS = JSON.parse(localStorage.getItem('campeonato'))
+    let campeonatoLS = JSON.parse(localStorage.getItem('campeonato ' + estadoLogin.user))
         if(campeonatoLS == null){
-            campeonato.duenio = estadoLogin.user
-            Swal.fire({
-                title: 'Ingrese el nombre de su campeonato',
-                input: 'text',
-                background: '#212529',
-                showCancelButton: true,
-                inputPlaceholder: 'Nombre del campeonato'
-            }).then((result) => {
-                console.log(result)
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Campeonato creado correctamente',
-                        background: '#212529',
-                        icon: 'success',
-                        timer: 1500,
-                        position: 'center',
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                    })
-                    campeonato.nombre = result.value
-
-                    const guardarLocal = (nombre, datos) => {localStorage.setItem(nombre, datos)};
-                        guardarLocal("campeonato", JSON.stringify(campeonato));
+            campeonato.nombre = prompt("Ingrese el nombre del campeonato que va a crear:")
+            while(campeonato.nombre === ""){
+                alert("El nombre del campeonato no puede estar vacío");
+                input = prompt("Ingrese el nombre del campeonato que va a crear:");
+            }
+            const guardarLocal = (nombre, datos) => {localStorage.setItem(nombre, datos)};
+                guardarLocal('campeonato ' + estadoLogin.user, JSON.stringify(campeonato));
 
                     location.reload()
-                }
-                if (result.isDismissed) {
-                    Swal.fire({
-                        title: 'Se canceló la creación del campeonato',
-                        background: '#212529',
-                        icon: 'error',
-                        timer: 1500,
-                        position: 'center',
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                    })
-                    window.location.href = '../../index.html'
-                }
-                })
-        } else{
+            } else {
             campeonato = campeonatoLS
             titulo.innerText = 'Campeonato ' + campeonato.nombre + ': Tabla de Posiciones'
         }
-}    
+}
+
+async function cargarPilotos(){
+    if(campeonato.pilotos.length == 0){
+        
+        let input = parseInt(prompt("Ingrese cuántos pilotos van a participar: "));
+
+        while((input <= 0 || isNaN(input))){
+            alert("Ingresó un valor erróneo");
+            input = parseInt(prompt("Ingrese cuántos pilotos van a participar: "));
+        }
+
+        for(let i=0; i<input; i++){
+            campeonato.pilotos.push(new Piloto(0, cargarNombrePiloto(), cargarEquipoPiloto(), 0))
+        }
+        
+        const guardarLocal = (nombre, datos) => {localStorage.setItem(nombre, datos)};
+            guardarLocal('campeonato ' + estadoLogin.user, JSON.stringify(campeonato));
+
+        location.reload()
+    }
+
+}
+
+
+
+function cargarNombrePiloto(){
+        let input = prompt("Ingrese el nombre del piloto: ");
+    
+        while(input === ""){
+            alert("El nombre no puede estar vacío");
+            input = prompt("Ingrese el nombre del piloto: ");
+        }
+    
+        return input;
+}
+
+function cargarEquipoPiloto(){
+
+        let input = prompt("Ingrese la escudería del piloto: ");
+    
+        while(input === ""){
+            alert("La escudería no puede estar vacía");
+            input = prompt("Ingrese la escudería del piloto: ");
+        }
+    
+        return input;
+}
 
 estadoLogueo()
-
 actualizarDatos()
+cargarPilotos()
 
 campeonato.pilotos.sort((a, b) => {return b.puntos - a.puntos;});
 
@@ -200,8 +217,8 @@ crearTabla()
 let boton = document.getElementById("botonAdd")
 
 boton.onclick = () => {
-    localStorage.setItem("pilotos", JSON.stringify(pilotos));
-    window.location.href = "../views/login.html"
+    localStorage.setItem('campeonato ' + estadoLogin.user, JSON.stringify(campeonato));
+    window.location.href = "../views/cargarDatos.html"
 }
 
 const search = document.getElementById("buscar")
